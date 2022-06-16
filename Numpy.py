@@ -1,10 +1,10 @@
 import numpy as np
 x=np.array([1,2,3]) #creates a numpy array
 y=np.array([1,2,3], dtype=str) #returns ints into str
-x*y #multiplies elements of arrays and returns a new array with elements of 1*1, 2*2, 3*3. Both arrays should have equal numbers of elements.
-x+y #sum both arrays and returns a new array [1+1,2+2,3+3]
-x*3 #multiplies array and returns a new array [1*3,2*3,3*3] but x array stays same 
-x=x*3 #if ypu want to change the array you should write like this
+#x*y #multiplies elements of arrays and returns a new array with elements of 1*1, 2*2, 3*3. Both arrays should have equal numbers of elements.
+#x+y #sum both arrays and returns a new array [1+1,2+2,3+3]
+#x*3 #multiplies array and returns a new array [1*3,2*3,3*3] but x array stays same 
+#x*3 #if ypu want to change the array you should write like this
 z=np.array(['1','2','3'], dtype=int) #returns strs into int
 a=np.zeros(8) #returns you an array with 8 zeros which are float
 b=np.zeros(8, dtype=str) #if you specify data type with str it gives you 8 empty strs, also you can use int32 dtype
@@ -22,8 +22,8 @@ q=np.full(4,5) # array with 4 elements of 5
 q=np.arange(4,9)# returns elements from 4 to 9, 9 is not included. Not supported for str and float and bool
 q=np.arange(2,12,2) # returns elements 2 to 12 by twos
 q=np.arange(12,2,-2)# returns elements 2 to 12 by backward twos
-q.reshape(2,3) #makes q array 2 dimensional with 2 lines and 3 columns but q should have 6 elements. q array stays same
-q.reshape (-1,2) #if you type -1 it decides what it should be. ex: if you have 6 elements it will give 3,2 
+#q.reshape(2,3) #makes q array 2 dimensional with 2 lines and 3 columns but q should have 6 elements. q array stays same
+#q.reshape (-1,2) #if you type -1 it decides what it should be. ex: if you have 6 elements it will give 3,2 
 q=np.linspace(1,2) #returns elements 1 to 2 with 50 elements (50 is default) and equal intervals. 1 and 2 are included
 q=np.linspace(1,2, num=3) #returns elements 1 to 2 with 3 elements. 1 and 2 are included. You don't have to write "num=", you also can write only q=np.linspace(1,2,3)
 q=np.linspace(1,2,3,endpoint=False) #if you don't want to include endpoint you can use ", endpoint=False"
@@ -33,3 +33,67 @@ x=np.random.randint(1,10, (3,4)) #returns a random array with elements from 1 to
 x=np.random.randint(1,10, (3,4,5)) #also can be used for 3 dimensional arrays. Returns an random array with elements from 1 to 10 and size is 3 depth, 4 lines, 5 colıumns
 x=np.random.randint(1,8) #returns a random number 
 x=np.eye(3,4) #creates an 2-dimensional array with elements of 0 and 1. every line has one 1.
+x=np.array([1,2,3])
+y=np.array([4,5,6])
+l=[7,8,"9.1"] #l can be tuple as well: l=(1,2,3)
+z=np.concatenate([x,y,l]) #combine x and y arrays, also you can combine with lists. If an array or list in this combination has float elements your combination will be elements of floats, same for str elements
+#if you try to concatenate two arrays with different shapes it will return an error
+x=np.array([2,3,5,8])
+y=np.zeros((4,3))
+#z=np.concatenate([x,y])  #Error: all the input arrays must have same number of dimensions
+z=np.concatenate([y,y], axis=1) #if you type axis=1 it will combine same array in a way that it repeat in right not below
+# output:
+# [[0. 0. 0. 0. 0. 0.]
+# [0. 0. 0. 0. 0. 0.]
+# [0. 0. 0. 0. 0. 0.]
+# [0. 0. 0. 0. 0. 0.]]
+z=np.concatenate([y,y])
+#output:
+# [[0. 0. 0.]
+# [0. 0. 0.]
+# [0. 0. 0.]
+# [0. 0. 0.]
+# [0. 0. 0.]
+# [0. 0. 0.]
+# [0. 0. 0.]
+# [0. 0. 0.]]
+y=np.array([5,8,6,5])
+z=np.concatenate([x,y])#normally these x and y arrays do not have a shape and if you concatenate these arrays it will return a single line of array combination.
+#output if you use concantenate:
+#[2 3 5 8 5 8 6 5]
+#but with stack, it will return them with different columns 
+#output:
+#[[2 3 5 8]
+# [5 8 6 5]]
+l=[0,1,2,3,4,5,6,7,8,9]
+z=np.split(l, [4,6]) #it will split your list or array between 3rd and 4th elements and 5th and 6th elements as arrays. more than 2 slices can be used
+#output:
+#[array([0, 1, 2, 3]), array([4, 5]), array([6, 7, 8, 9])]
+m,r,b=np.split(l, [4,6])
+#print(m,r,b) output:
+#[0 1 2 3] [4 5] [6 7 8 9]
+a=np.arange(20).reshape(2,10)
+#[[ 0  1  2  3  4  5  6  7  8  9]
+# [10 11 12 13 14 15 16 17 18 19]]
+z=np.vsplit(a,[1])
+#[[ 0  1  2  3  4  5  6  7  8  9]
+#-------------------------------->split from here (vertically) (from 1st line)
+# [10 11 12 13 14 15 16 17 18 19]]
+z=np.vsplit(a,[1])[0] #this is in list format you can access 0th index as well
+#[[0 1 2 3 4 5 6 7 8 9]]
+z=np.hsplit(a, [4,7])
+#[[ 0  1  2  3 | 4  5  6 | 7  8  9]
+# [10 11 12 13 |14 15 16 |17 18 19]]
+#              !         !
+#            split from there
+#output:
+#[array([[ 0,  1,  2,  3],
+#       [10, 11, 12, 13]]), array([[ 4,  5,  6],
+#       [14, 15, 16]]), array([[ 7,  8,  9],
+#       [17, 18, 19]])]
+z=np.hsplit(a, [4,7])[0] 
+#output:
+#[[ 0  1  2  3]
+# [10 11 12 13]]
+
+print(z)
