@@ -95,5 +95,62 @@ z=np.hsplit(a, [4,7])[0]
 #output:
 #[[ 0  1  2  3]
 # [10 11 12 13]]
+z=np.sort(y) #it sorts your array smallest to biggest
+#output:[5 5 6 8]
+z=np.argsort(y) #sorts your array and gives indexes of these elements
+#original array->[5,8,6,5] , sorted version of it->[5 5 6 8]
+#output:[0 3 2 1]
 
-print(z)
+### fancy indexing ###
+x=np.arange(1,15)
+idx=[4,5,7,1] #indexes which you want to return
+#print(x[idx])
+#output:[5 6 8 2]
+x=np.arange(15).reshape(3,5)
+x[0:2,2:4]
+# -  - - -  - - -
+# 0  1 | 2  3 | 4 
+# 4  6 | 7  8 | 9 
+# -  - - -  - - - 
+# 10 11| 12 13| 14
+#output:[[2 3]
+#        [7 8]]
+x[1, [3,4]] #2nd lines 4th and 5th indexes
+#output:[8 9] 
+x[0:, [3,4]] #returns every lines 4th and 5th columns
+#output: [[ 3  4]
+#         [ 8  9]
+#         [13 14]]
+idx1=[1,0,2]
+idx2=[3,0,2]
+x[idx1,idx2] #output: [ 8  0 12]
+
+#   changing indexes   #
+y=np.arange(19)
+y[[2,5,8,1,6]]=15 #2,5,8,1,6th indexes are 15 now outout: [ 0 15 15  3  4 15 15  7 15  9 10 11 12 13 14 15 16 17 18]
+x=np.arange(1,21).reshape(4,5)
+y=x[:2,:3].copy() #output: [[1 2 3] -->copy() copies a list. since y is a sublist if you change an index in y this index is also changed in x. if you do not want to affect x array you can copy subarray y.
+#                           [6 7 8]]
+
+### conditional indexing ###
+x=np.arange(1,10)
+x<5 #looks indexes of x for being <5. if yes returns true -> output:[ True  True  True  True False False False False False]
+x[x<5] #looks indexes of x and returns the elements which are <5 --> output:[1 2 3 4]
+y=np.array([1,5,7,6,2,7,9,8,4])
+x==y #looks if these array values in same indexes are equal or not ->output:[ True False False False False False False  True False] !arrays should have equal numbers of elements
+x[x==y] #returns the values of x which are equal with y ->output:[1 8]
+(x<3)|(x>5) # "|" means "or" ->output: [ True  True False False False  True  True  True  True]
+(x<3) & (x>1) # "&" means "and" ->output: [False  True False False False False False False False]
+x[(x<3)|(x>5)] #output:[1 2 6 7 8 9]
+~(x>4) # "~" means "not" ->output:[ True  True  True  True False False False False False]
+np.sum(x) # sums all elements of x
+np.sum(x<5) #counts elements which are smaller than 5 ->output: 5
+np.sum(x[x<5]) #sums elements of x which are smaller then 5
+x=np.arange(20).reshape(4,5)
+np.sum(x, axis=0) #sums elements of x which are in same line and returns their value in an array. if axix=1 it would sums elements in same column ->output:[30 34 38 42 46]
+np.all(x>-1) #looks all elements of x and returns true if all of them are bigger then -1. vice versa is valid with false ->output:True
+np.all(x<5, axis=1) #looks all elements of x by columns -> output: [ True False False False]
+np.any(x<5, axis=0)#looks all elements of x and returns true if any of them is smaller then 5 by lines.-> output:[ True  True  True  True  True]
+
+
+ 
